@@ -22,11 +22,6 @@ namespace Snake.Border
 
         public void DrawBorder()
         {
-            //Console.SetCursorPosition(PositionB.X, PositionB.Y);
-            //Console.Write("*");
-            //Console.SetCursorPosition(PositionA.X, PositionA.Y);
-            //Console.Write("*");
-
             int delta = PositionB.X - PositionA.X;
             for (int i = 0; i < delta-1; i++)
             {

@@ -23,14 +23,13 @@ namespace Snake
             Console.WindowWidth = 120;
             Console.BufferHeight = Console.WindowTop + Console.WindowHeight;
             Console.BufferWidth = Console.WindowLeft + Console.WindowWidth;
-            //Console.WriteLine(Console.BufferHeight + "x" + Console.BufferWidth);
+
+            new FullBorder(new PointConsole(0, 0),
+                new PointConsole(Console.WindowWidth, 0),
+                new PointConsole(Console.WindowHeight, 0),
+                new PointConsole(Console.WindowHeight, Console.WindowHeight));
             Console.ReadKey();
             Console.Clear();
-
-            new BorderHorizontal(new PointConsole(0, 0), new PointConsole(Console.WindowWidth, 0)).DrawBorder();
-            new BorderHorizontal(new PointConsole(0, Console.WindowHeight), new PointConsole(Console.WindowWidth, Console.WindowHeight)).DrawBorder();
-
-
             InitConsole();
         }
     }
