@@ -17,7 +17,17 @@ namespace Snake.Border
         public string Symbol { get ; set ; }
         public Color Color { get; set; }
 
-        public List<PointConsole> pointsList = null;
+        private List<PointConsole> _pointsList = null;
+        public List<PointConsole> BodrerPoints
+        {
+            get
+            {
+                if (_pointsList != null)
+                    return _pointsList;
+                else
+                    return new List<PointConsole>();
+            }
+        }
 
         public FullBorder(PointConsole pLU, PointConsole pRU, PointConsole pLD, PointConsole pRD)
         {
@@ -31,17 +41,13 @@ namespace Snake.Border
 
         private void DrawBorder()
         {
-            //drawPoint(_pLeftUp);
-            //drawPoint(_pRightUp);
-            //drawPoint(_pLeftDown);
-            //drawPoint(_pRightDown);
+            _pointsList = new List<PointConsole>();
+            new BorderHorizontal(_pLeftUp, _pRightUp).DrawBorder(ref _pointsList);
+            new BorderHorizontal(_pLeftDown, _pRightDown).DrawBorder(ref _pointsList);
 
-            pointsList = new List<PointConsole>();
-            new BorderHorizontal(_pLeftUp, _pRightUp).DrawBorder(ref pointsList);
-            new BorderHorizontal(_pLeftDown, _pRightDown).DrawBorder(ref pointsList);
+            new BorderVertical(_pLeftUp, _pLeftDown).DrawBorder(ref _pointsList);
+            new BorderVertical(_pRightUp, _pRightDown).DrawBorder(ref _pointsList);
 
-            new BorderVertical(_pLeftUp, _pLeftDown).DrawBorder(ref pointsList);
-            new BorderVertical(_pRightUp, _pRightDown).DrawBorder(ref pointsList);
         }
 
         private void drawPoint(PointConsole p)
