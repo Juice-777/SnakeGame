@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Snake.Border
 {
-    interface Border
+    interface IBorder
     {
         PointConsole PositionA { get; set; }
         PointConsole PositionB { get; set; }
         string Symbol { get; set; }
-        Color Color { get; set; }
+        ConsoleColor Color { get; set; }
 
         void DrawBorder();
     }

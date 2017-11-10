@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Border\Border.cs" />
+    <Compile Include="Border\IBorder.cs" />
     <Compile Include="Border\BorderHorizontal.cs" />
+    <Compile Include="Border\BorderVertical.cs" />
     <Compile Include="Border\FullBorder.cs" />
     <Compile Include="PointConsole.cs" />
     <Compile Include="Program.cs" />
