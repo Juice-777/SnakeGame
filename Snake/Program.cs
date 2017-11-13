@@ -43,11 +43,11 @@ namespace Snake
 
         private static void Start()
         {
-            InitBorder();
-            Snake.Move();
+            //InitBorder();
+            //Snake.Move();
 
-            Console.ReadKey();
-            Console.Clear();
+            //Console.ReadKey();
+            //Console.Clear();
             //Start();
         }
         private static void InitBorder()
