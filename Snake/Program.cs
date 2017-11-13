@@ -9,62 +9,86 @@ namespace Snake
 {
     abstract class Program
     {
-        public static int aaa = 0;
-        private static System.Timers.Timer aTimer;
+        static System.Timers.Timer _gameTimer;
+        private static int speedSnake = 100;
         static List<PointConsole> _borderPointsList = new List<PointConsole>();
-        //InitBorder();
-        //Snake.Move();
-        //Snake.EditDirection(Console.ReadKey());
         static void Main(string[] args)
         {
-           StartTimer();
-        }
-
-        public static void StartTimer()
-        {
-            aTimer = new System.Timers.Timer(500);
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
-
-            Console.ReadKey();
-            aTimer.Stop();
-            aTimer.Dispose();
+            Console.CursorVisible = false;
+            CreateBorder();
+            _borderPointsList = FullBorder.BodrerPoints;
+            Eat.GeneratePosEat();
             StartTimer();
         }
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private static void StartTimer()
         {
-            InitBorder();
+            _gameTimer = new System.Timers.Timer(speedSnake);
+            _gameTimer.Elapsed += GameAction;
+            _gameTimer.AutoReset = true;
+            _gameTimer.Enabled = true;
+            Snake.EditDirection(Console.ReadKey());
+            if (ValidAction())
+            {
+                _gameTimer.Stop();
+                _gameTimer.Dispose();
+                StartTimer();
+            }
+        }
+
+        private static void GameAction(Object source, ElapsedEventArgs e)
+        {
             Snake.Move();
-            var a = Console.Read();
-            Snake.EditDirection(Convert.ToString(a));
+            if (ValidAction())
+                Snake.EditDirection(Console.ReadKey());
+        }
+        
+        private static void CreateBorder()
+        {
+            Console.WindowHeight = 20;
+            Console.WindowWidth = 60;
+            Console.BufferHeight = Console.WindowHeight;
+            Console.BufferWidth = Console.WindowWidth;
+
+            FullBorder.CreateBorder(new PointConsole(0, 0),
+                                    new PointConsole(Console.WindowWidth - 1, 0),
+                                    new PointConsole(0, Console.WindowHeight - 1),
+                                    new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
         }
 
-        private static void Start()
+        static bool ValidAction()
         {
-            //InitBorder();
-            //Snake.Move();
+            PointConsole headCoord = Snake.GetHeadCoord();
+            PointConsole eatPosition = Eat.Position;
 
-            //Console.ReadKey();
-            //Console.Clear();
-            //Start();
+            if (eatPosition.X == headCoord.X && eatPosition.Y == headCoord.Y)
+            {
+                Eat.GeneratePosEat();
+                Snake.Rise();
+            }
+
+            if (_borderPointsList.Exists(x => x.Y == headCoord.Y && x.X == headCoord.X))           
+            {
+                GameOver();
+                return false;
+            }
+
+            if (Snake.BodyPoints != null)
+            {
+                if (Snake.BodyPoints.Exists(x => x.Y == headCoord.Y && x.X == headCoord.X && x != Snake.BodyPoints.First()))
+                {
+                    GameOver();
+                    return false;
+                }
+            }
+            return true;
         }
-        private static void InitBorder()
+
+        static void GameOver()
         {
+            _gameTimer.Stop();
+            _gameTimer.Dispose();
             Console.Clear();
-
-            Console.WindowHeight = 40;
-            Console.WindowWidth = 120;
-            Console.BufferHeight = Console.WindowTop + Console.WindowHeight;
-            Console.BufferWidth = Console.WindowLeft + Console.WindowWidth;
-
-            var border = new FullBorder(new PointConsole(0, 0),
-                            new PointConsole(Console.WindowWidth - 1, 0),
-                            new PointConsole(0, Console.WindowHeight - 1),
-                            new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
-            _borderPointsList = border.BodrerPoints;
         }
     }
-
 }
