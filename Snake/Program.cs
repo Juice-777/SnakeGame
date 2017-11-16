@@ -11,6 +11,9 @@ namespace Snake
     {
         private static int speedSnake = 100;
         static List<PointConsole> _borderPointsList = new List<PointConsole>();
+        //InitBorder();
+        //Snake.Move();
+        //Snake.EditDirection(Console.ReadKey());
         static void Main(string[] args)
         {
             Start();
@@ -45,44 +48,29 @@ namespace Snake
 
         private static void CreateBorder()
         {
-            Console.WindowHeight = 20;
-            Console.WindowWidth = 60;
-            Console.BufferHeight = Console.WindowHeight;
-            Console.BufferWidth = Console.WindowWidth;
+            //InitBorder();
+            //Snake.Move();
 
-            FullBorder.CreateBorder(new PointConsole(0, 0),
-                                    new PointConsole(Console.WindowWidth - 1, 0),
-                                    new PointConsole(0, Console.WindowHeight - 1),
-                                    new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
+            //Console.ReadKey();
+            //Console.Clear();
+            //Start();
         }
-
-        static bool ValidAction()
+        private static void InitBorder()
         {
-            PointConsole headCoord = Snake.GetHeadCoord();
-            PointConsole eatPosition = Eat.Position;
+            Console.Clear();
 
-            if (eatPosition.X == headCoord.X && eatPosition.Y == headCoord.Y)
-            {
-                Eat.GeneratePosEat();
-                Snake.Rise();
-            }
+            Console.WindowHeight = 40;
+            Console.WindowWidth = 120;
+            Console.BufferHeight = Console.WindowTop + Console.WindowHeight;
+            Console.BufferWidth = Console.WindowLeft + Console.WindowWidth;
 
-            if (_borderPointsList.Exists(x => x.Y == headCoord.Y && x.X == headCoord.X))           
-            {
-                GameOver();
-                return false;
-            }
-
-            if (Snake.BodyPoints != null)
-            {
-                if (Snake.BodyPoints.Exists(x => x.Y == headCoord.Y && x.X == headCoord.X && x != Snake.BodyPoints.First()))
-                {
-                    GameOver();
-                    return false;
-                }
-            }
-            return true;
+            var border = new FullBorder(new PointConsole(0, 0),
+                            new PointConsole(Console.WindowWidth - 1, 0),
+                            new PointConsole(0, Console.WindowHeight - 1),
+                            new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
+            _borderPointsList = border.BodrerPoints;
         }
+    }
 
         static void GameOver()
         {

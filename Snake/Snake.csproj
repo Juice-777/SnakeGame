@@ -48,7 +48,6 @@
     <Compile Include="Border\BorderHorizontal.cs" />
     <Compile Include="Border\BorderVertical.cs" />
     <Compile Include="Border\FullBorder.cs" />
-    <Compile Include="Eat.cs" />
     <Compile Include="PointConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
