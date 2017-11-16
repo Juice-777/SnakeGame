@@ -23,8 +23,6 @@ namespace Snake
         {
             _ViewSymb = '@';
             _ColorEat = ConsoleColor.Red;
-            GeneratePosEat();
-            Draw();
         }
 
         static void Draw()

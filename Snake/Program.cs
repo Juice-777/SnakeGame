@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Snake.Border;
-using System.Timers;
 
 namespace Snake
 {
     abstract class Program
     {
-        static System.Timers.Timer _gameTimer;
-        private static int speedSnake = 100;
+        private static int speedSnake = 500;
         static List<PointConsole> _borderPointsList = new List<PointConsole>();
         static void Main(string[] args)
         {
@@ -18,29 +17,22 @@ namespace Snake
             CreateBorder();
             _borderPointsList = FullBorder.BodrerPoints;
             Eat.GeneratePosEat();
-            StartTimer();
+            Start();
         }
 
-        private static void StartTimer()
+        private static void Start()
         {
-            _gameTimer = new System.Timers.Timer(speedSnake);
-            _gameTimer.Elapsed += GameAction;
-            _gameTimer.AutoReset = true;
-            _gameTimer.Enabled = true;
-            Snake.EditDirection(Console.ReadKey());
-            if (ValidAction())
+
+            while (true)
             {
-                _gameTimer.Stop();
-                _gameTimer.Dispose();
-                StartTimer();
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    Snake.EditDirection(keyInfo);
+                }
+                Snake.Move();
+                Thread.Sleep(speedSnake);
             }
-        }
-
-        private static void GameAction(Object source, ElapsedEventArgs e)
-        {
-            Snake.Move();
-            if (ValidAction())
-                Snake.EditDirection(Console.ReadKey());
         }
         
         private static void CreateBorder()
@@ -86,8 +78,6 @@ namespace Snake
 
         static void GameOver()
         {
-            _gameTimer.Stop();
-            _gameTimer.Dispose();
             Console.Clear();
         }
     }
