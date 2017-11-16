@@ -9,7 +9,7 @@ namespace Snake
 {
     public static class Snake 
     {
-        static List<PointConsole> BodyPoints { get; set; }
+        public static List<PointConsole> BodyPoints { get; set; }
         static ConsoleColor ColorSnake { get; set; }
         static char HeadSymb { get; set; }
         static char BodySymb { get; set; }

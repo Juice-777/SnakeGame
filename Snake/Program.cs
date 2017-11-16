@@ -33,7 +33,7 @@ namespace Snake
                     Snake.EditDirection(keyInfo);
                 }
                 Snake.Move();
-                GemeOn = ValidAction();
+                //GemeOn = ValidAction();
                 Thread.Sleep(speedSnake);
             }
         }
@@ -42,7 +42,6 @@ namespace Snake
         {
             Console.CursorVisible = false;
             CreateBorder();
-            _borderPointsList = FullBorder.BodrerPoints;
             Eat.GeneratePosEat();
         }
 
@@ -70,7 +69,6 @@ namespace Snake
                             new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
             _borderPointsList = border.BodrerPoints;
         }
-    }
 
         static void GameOver()
         {
