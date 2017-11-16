@@ -24,7 +24,13 @@ namespace Snake.Border
 
         public void DrawBorder()
         {
-            throw new NotImplementedException();
+            int delta = PositionB.X - PositionA.X;
+            for (int i = 0; i < delta; i++)
+            {
+                PointConsole point = new PointConsole(i, PositionB.Y);
+                Console.SetCursorPosition(point.X, point.Y);
+                Console.Write(Symbol);
+            }
         }
 
         public void DrawBorder(ref List<PointConsole> list)
@@ -39,7 +45,6 @@ namespace Snake.Border
                 Console.Write(Symbol);
                 list.Add(point);
             }
-            Console.ForegroundColor = ConsoleColor.DarkGray;
         }
     }
 }

@@ -24,7 +24,14 @@ namespace Snake.Border
 
         public void DrawBorder()
         {
-            throw new NotImplementedException();
+            int delta = PositionB.Y - PositionA.Y;
+            Console.ForegroundColor = Color;
+            for (int i = 0; i < delta; i++)
+            {
+                PointConsole point = new PointConsole(PositionA.X, i);
+                Console.SetCursorPosition(point.X, point.Y);
+                Console.Write(Symbol);
+            }
         }
 
         public void DrawBorder(ref List<PointConsole> list)

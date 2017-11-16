@@ -68,7 +68,7 @@ namespace Snake
 
             var border = new FullBorder(new PointConsole(0, 0),
                             new PointConsole(Console.WindowWidth - 1, 0),
-                            new PointConsole(0, Console.WindowHeight - 1),
+                            new PointConsole(1, Console.WindowHeight - 1),
                             new PointConsole(Console.WindowWidth - 1, Console.WindowHeight - 1));
             _borderPointsList = border.BodrerPoints;
         }

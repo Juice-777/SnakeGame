@@ -13,19 +13,15 @@ namespace Snake
         static ConsoleColor ColorSnake { get; set; }
         static char HeadSymb { get; set; }
         static char BodySymb { get; set; }
-        static public Direction Direct { get; set; }
-
-        public static PointConsole HeadPosition
-        {
-            get { return BodyPoints.First(); }
-        }
+        static Direction Direct { get; set; }
+        public static PointConsole HeadPosition { get { return BodyPoints.First(); } }
 
         static Snake()
         {
             ColorSnake = ConsoleColor.Green;
             HeadSymb = '#';
             BodySymb = 'X';
-            Direct = Direction.up;
+            Direct = Direction.Up;
 
             BornBody();
         }
@@ -33,13 +29,13 @@ namespace Snake
         public static void Move()
         {
             PointConsole tempPoint = BodyPoints.First();
-            if (Direct == Direction.up)
+            if (Direct == Direction.Up)
                 tempPoint = new PointConsole(tempPoint.X, tempPoint.Y - 1);
-            if (Direct == Direction.down)
+            if (Direct == Direction.Down)
                 tempPoint = new PointConsole(tempPoint.X, tempPoint.Y + 1);
-            if (Direct == Direction.left)
+            if (Direct == Direction.Left)
                 tempPoint = new PointConsole(tempPoint.X-1, tempPoint.Y);
-            if (Direct == Direction.right)
+            if (Direct == Direction.Right)
                 tempPoint = new PointConsole(tempPoint.X + 1, tempPoint.Y);
 
             BodyPoints.Insert(0, tempPoint);
@@ -53,16 +49,12 @@ namespace Snake
             Console.ForegroundColor = ColorSnake;
             foreach (var p in BodyPoints)
             {
-                char ch;
-                if (BodyPoints.First() == p)
-                    ch = HeadSymb;
-                else
-                    ch = BodySymb;
-
                 Console.SetCursorPosition(p.X, p.Y);
-                Console.Write(ch);
+                if (BodyPoints.First() == p)
+                    Console.Write(HeadSymb);
+                else
+                    Console.Write(BodySymb);
             }
-            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         public static void EditDirection(ConsoleKeyInfo key )
@@ -70,16 +62,16 @@ namespace Snake
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
-                    Direct = Direction.up;
+                    Direct = Direction.Up;
                     break;
                 case ConsoleKey.DownArrow:
-                    Direct = Direction.down;
+                    Direct = Direction.Down;
                     break;
                 case ConsoleKey.LeftArrow:
-                    Direct = Direction.left;
+                    Direct = Direction.Left;
                     break;
                 case ConsoleKey.RightArrow:
-                    Direct = Direction.right;
+                    Direct = Direction.Right;
                     break;
             }
         }
@@ -99,10 +91,10 @@ namespace Snake
 
         public enum Direction
         {
-            up,
-            down,
-            left,
-            right
+            Up,
+            Down,
+            Left,
+            Right
         }
     }
 }

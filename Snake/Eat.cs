@@ -11,13 +11,7 @@ namespace Snake
         static char _ViewSymb { get; set; }
         static ConsoleColor _ColorEat { get; set; }
         static PointConsole _Position { get; set; }
-        static public PointConsole Position
-        {
-            get
-            {
-                return _Position; 
-            }
-        }
+        static public PointConsole Position { get {  return _Position;  } }
 
         static Eat()
         {
@@ -27,10 +21,9 @@ namespace Snake
 
         static void Draw()
         {
-            Console.ForegroundColor = _ColorEat;
             Console.SetCursorPosition(_Position.X, _Position.Y);
+            Console.ForegroundColor = _ColorEat;
             Console.WriteLine(_ViewSymb);
-            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         public static void GeneratePosEat()
