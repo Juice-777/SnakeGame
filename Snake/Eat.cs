@@ -27,10 +27,9 @@ namespace Snake
 
         static void Draw()
         {
-            Console.ForegroundColor = _ColorEat;
             Console.SetCursorPosition(_Position.X, _Position.Y);
+            Console.ForegroundColor = _ColorEat;
             Console.WriteLine(_ViewSymb);
-            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         public static void GeneratePosEat()

@@ -9,21 +9,20 @@ namespace Snake
 {
     abstract class Program
     {
-        private static int speedSnake = 500;
+        private static int speedSnake = 100;
         static List<PointConsole> _borderPointsList = new List<PointConsole>();
         static void Main(string[] args)
         {
-            Console.CursorVisible = false;
-            CreateBorder();
-            _borderPointsList = FullBorder.BodrerPoints;
-            Eat.GeneratePosEat();
             Start();
         }
 
         private static void Start()
         {
+            Init();
 
-            while (true)
+            Console.ReadKey();
+            bool GemeOn = true;
+            while (GemeOn)
             {
                 if (Console.KeyAvailable)
                 {
@@ -31,10 +30,19 @@ namespace Snake
                     Snake.EditDirection(keyInfo);
                 }
                 Snake.Move();
+                GemeOn = ValidAction();
                 Thread.Sleep(speedSnake);
             }
         }
-        
+
+        private static void Init()
+        {
+            Console.CursorVisible = false;
+            CreateBorder();
+            _borderPointsList = FullBorder.BodrerPoints;
+            Eat.GeneratePosEat();
+        }
+
         private static void CreateBorder()
         {
             Console.WindowHeight = 20;
@@ -78,7 +86,13 @@ namespace Snake
 
         static void GameOver()
         {
+            string finanalMsg = "Game Over";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - finanalMsg.Length/2, Console.WindowHeight / 2 + 1);
+            Console.WriteLine(finanalMsg);
+            Console.ReadKey();
+            Start();
         }
     }
 }
