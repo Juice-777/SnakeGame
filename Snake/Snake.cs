@@ -99,14 +99,18 @@ namespace Snake
             }
         }
 
-        static  void BornBody()
+        static void BornBody()
         {
-            List<PointConsole> spoints = new List<PointConsole>();
-            spoints.Add(new PointConsole(62, 22));
-            spoints.Add(new PointConsole(62, 23));
-            spoints.Add(new PointConsole(62, 24));
-            spoints.Add(new PointConsole(62, 25));
-            BodyPoints = spoints;
+            BodyPoints = new List<PointConsole>();
+            PointConsole centr = new PointConsole(Console.WindowWidth / 2, Console.WindowHeight /2);
+            for (int i = 0; i < 5; i++)
+                BodyPoints.Add(new PointConsole(centr.X, centr.Y + i));
+
+        }
+
+        public static void Rise()
+        {
+            BodyPoints.Add(BodyPoints.Last());
         }
 
         public enum Direction

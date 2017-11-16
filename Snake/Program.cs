@@ -33,9 +33,20 @@ namespace Snake
                     Snake.EditDirection(keyInfo);
                 }
                 Snake.Move();
-                //GemeOn = ValidAction();
+                GemeOn = ValidAction();
                 Thread.Sleep(speedSnake);
             }
+        }
+
+        static bool ValidAction()
+        {
+            bool result = true;
+            if (Snake.HeadPosition.X == Eat.Position.X && Snake.HeadPosition.Y == Eat.Position.Y)
+            {
+                Snake.Rise();
+                Eat.GeneratePosEat();
+            }
+            return result;
         }
 
         private static void Init()
@@ -46,15 +57,6 @@ namespace Snake
         }
 
         private static void CreateBorder()
-        {
-            //InitBorder();
-            //Snake.Move();
-
-            //Console.ReadKey();
-            //Console.Clear();
-            //Start();
-        }
-        private static void InitBorder()
         {
             Console.Clear();
 
