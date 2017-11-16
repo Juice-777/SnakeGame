@@ -27,5 +27,11 @@ namespace Snake
             _x = x;
             _y = y;
         }
+
+        public void DrawPoint(Char ch)
+        {
+            Console.SetCursorPosition(_x, _y);
+            Console.WriteLine(ch);
+        }
     }
 }

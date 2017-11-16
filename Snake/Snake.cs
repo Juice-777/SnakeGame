@@ -14,7 +14,11 @@ namespace Snake
         static char HeadSymb { get; set; }
         static char BodySymb { get; set; }
         static public Direction Direct { get; set; }
-        public static PointConsole HeadPosition { get; set; }
+
+        public static PointConsole HeadPosition
+        {
+            get { return BodyPoints.First(); }
+        }
 
         static Snake()
         {
@@ -39,8 +43,8 @@ namespace Snake
                 tempPoint = new PointConsole(tempPoint.X + 1, tempPoint.Y);
 
             BodyPoints.Insert(0, tempPoint);
+            new PointConsole(BodyPoints.Last().X, BodyPoints.Last().Y).DrawPoint(' ');
             BodyPoints.Remove(BodyPoints.Last());
-
             DrawSnake();
         }
 
@@ -79,25 +83,6 @@ namespace Snake
                     break;
             }
         }
-        public static void EditDirection(string key)
-        {
-
-            switch (key)
-            {
-                case "4":
-                    Direct = Direction.up;
-                    break;
-                case "97":
-                    Direct = Direction.down;
-                    break;
-                case "a":
-                    Direct = Direction.left;
-                    break;
-                case "d":
-                    Direct = Direction.right;
-                    break;
-            }
-        }
 
         static void BornBody()
         {
@@ -105,7 +90,6 @@ namespace Snake
             PointConsole centr = new PointConsole(Console.WindowWidth / 2, Console.WindowHeight /2);
             for (int i = 0; i < 5; i++)
                 BodyPoints.Add(new PointConsole(centr.X, centr.Y + i));
-
         }
 
         public static void Rise()

@@ -49,12 +49,5 @@ namespace Snake.Border
             new BorderVertical(_pRightUp, _pRightDown).DrawBorder(ref _pointsList);
 
         }
-
-        private void drawPoint(PointConsole p)
-        {
-            Console.SetCursorPosition(p.X, p.Y);
-            Console.WriteLine("*");
-        }
-
     }
 }
